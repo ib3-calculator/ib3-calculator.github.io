@@ -2432,12 +2432,12 @@
             makeSlotState('BonusComboGem_5', 1, 0.0)
           ];
         case 'eightFailFallback':
-          // High-value mixed gems that exceed NormalPool maxCost ceilings (~2.5M), forcing all 8 attempts
-          // to fail and trigger the 8-failure fallback (where int(0.2) = 0 leaves non-tier-up rolls at 0% rand).
+          // BonusComboLenGem (12,555,000g, ItemRare=0!) + 2 non-maxed gems passes InvalidCookCombo
+          // while exceeding every NormalPool maxCost ceiling, forcing 100% 8-fail fallback with int(0.88)=0!
           return [
-            makeSlotState('UberElementalGemMax', 0, 0.0),
-            makeSlotState('BreakBossGetSuper_1', 1, 0.0),
-            makeSlotState('BreakBossGetMagic_1', 1, 0.0)
+            makeSlotState('BonusComboLenGem', 0, 0.0),
+            makeSlotState('BreakBossGetSuper_1', 0, 0.0),
+            makeSlotState('BreakBossGetMagic_1', 0, 0.0)
           ];
         case 'sameUpgrade':
           return [
@@ -3742,11 +3742,11 @@
       { id: 'TRA_World_8_Butterfly', enumVal: 38, name: 'Blue Butterfly', short: 'Butterfly', mixType: 1, cost: 1000,   chips: 20  },
       { id: 'TRA_World_1_Cactus',    enumVal: 31, name: 'Green Cactus',   short: 'Cactus',    mixType: 2, cost: 250,    chips: 5   },
       { id: 'TRA_World_4_Reeds',     enumVal: 34, name: 'Green Reeds',    short: 'Reeds',     mixType: 2, cost: 2500,   chips: 20  },
-      { id: 'TRA_World_3_PinkPlant', enumVal: 33, name: 'Red Flower',     short: 'Red Flower',mixType: 4, cost: 500,    chips: 5   },
+      { id: 'TRA_World_3_PinkPlant', enumVal: 33, name: 'Pink Plant',     short: 'Pink Plant',mixType: 4, cost: 500,    chips: 5   },
       { id: 'TRA_World_6_Mushroom',  enumVal: 36, name: 'Red Mushroom',   short: 'Mushroom',  mixType: 4, cost: 5000,   chips: 20  },
       { id: 'TRA_World_10_Cocoon',   enumVal: 40, name: 'Yellow Cocoon',  short: 'Cocoon',    mixType: 3, cost: 750,    chips: 5   },
       { id: 'TRA_World_11_Bones',    enumVal: 41, name: 'Yellow Bones',   short: 'Bones',     mixType: 3, cost: 7500,   chips: 20  },
-      { id: 'TRA_World_5_DesertBulb',enumVal: 35, name: 'Rare Bulb',    short: 'Bulb',      mixType: 5, cost: 25000,  chips: 50  },
+      { id: 'TRA_World_5_DesertBulb',enumVal: 35, name: 'Desert Bulb',    short: 'Bulb',      mixType: 5, cost: 25000,  chips: 50  },
       { id: 'TRA_World_7_Root',      enumVal: 37, name: 'Rare Root',      short: 'Rare Root', mixType: 5, cost: 250000, chips: 100 }
     ];
     const REAGENT_BY_ID = Object.fromEntries(REAGENTS.map(r => [r.id, r]));
@@ -4002,7 +4002,7 @@
         bRequiresSetOrder: true,
         recipeOnly: true,
         reagents: ['TRA_World_2_Berries', 'TRA_World_1_Cactus', 'TRA_World_3_PinkPlant', 'TRA_World_10_Cocoon', 'TRA_World_5_DesertBulb'],
-        note: 'STRICT ORDER REQUIRED: Berries → Cactus → Red Flower → Cocoon → Rare Bulb. Recipe-exclusive (ItemRare=100).'
+        note: 'STRICT ORDER REQUIRED: Berries → Cactus → Pink Plant → Cocoon → Desert Bulb. Recipe-exclusive (ItemRare=100).'
       },
       {
         index: 6,
@@ -4270,7 +4270,8 @@
               : 0;
 
             const targetMin = Math.trunc(scaledValue * 1.0);
-            const targetMax = Math.trunc(scaledValue * 3.333);
+            // GetRandomPotion passes GoldScale = 10.0 * GemToPotionValueScale (10.0) = 100.0 to GetRandomGem!
+            const targetMax = Math.trunc(scaledValue * 100.0);
 
             preferredBuf.length = 0;
             validBuf.length = 0;
