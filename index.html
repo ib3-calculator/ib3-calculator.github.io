@@ -276,21 +276,21 @@
 
       <!-- Gem Forge Quick Presets Bar -->
       <div id="gemPresetsBar" class="mt-4 flex flex-wrap items-center gap-2">
-        <span class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mr-1">Quick Presets:</span>
+        <span class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mr-1">Quick Forges:</span>
         <button type="button" data-preset="rareAttack" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-slate-700/80 hover:border-gold-500/60 text-slate-200 hover:text-gold-200 transition">
           Rare Attack Gem (Normal+In+Out)
         </button>
         <button type="button" data-preset="shapeLockBreak" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-amber-600/50 hover:border-amber-400 text-amber-200 transition">
-          High-Value Shape-Lock Break (&gt;1M)
+          Shape-Lock Break (&gt;1M Clamp)
+        </button>
+        <button type="button" data-preset="eightFailFallback" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-rose-600/50 hover:border-rose-400 text-rose-200 transition">
+          8-Fail Fallback (int(0.2)=0)
         </button>
         <button type="button" data-preset="sameUpgrade" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-slate-700/80 hover:border-gold-500/60 text-slate-200 hover:text-gold-200 transition">
-          Same-Gem Upgrade (3× Attack +10)
+          Same-Gem Upgrade (int(1.1)=1)
         </button>
         <button type="button" data-preset="upgradeDarkfire" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-slate-700/80 hover:border-gold-500/60 text-slate-200 hover:text-gold-200 transition">
           Upgrade Rare Darkfire +1000
-        </button>
-        <button type="button" data-preset="spectrumDef" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-slate-700/80 hover:border-gold-500/60 text-slate-200 hover:text-gold-200 transition">
-          Mixed Elemental Defense → 5%
         </button>
         <button type="button" data-preset="randomMidTier" class="preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-forge-800/90 hover:bg-forge-700 border border-slate-700/80 hover:border-gold-500/60 text-slate-200 hover:text-gold-200 transition">
           3× Random Mixed Mid-Tier
@@ -301,22 +301,22 @@
       <div id="potionPresetsBar" class="hidden mt-4 flex flex-wrap items-center gap-2">
         <span class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mr-1">Quick Brews:</span>
         <button type="button" data-potion-preset="parryAll" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-cryo-500/45 hover:border-cryo-300 text-cryo-200 transition">
-          Parry All Attacks (Ordered #6)
+          Parry All (Ordered #6)
         </button>
-        <button type="button" data-potion-preset="elemDef" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-cryo-500/45 hover:border-cryo-300 text-cryo-200 transition">
-          100% Elemental Defense (Ordered #5)
-        </button>
-        <button type="button" data-potion-preset="darkfire500" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-slate-600/80 hover:border-cryo-400 text-slate-200 hover:text-cryo-200 transition">
+        <button type="button" data-potion-preset="darkfire500" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-cryo-500/45 hover:border-cryo-300 text-cryo-200 transition">
           Rare Darkfire +500 (10× Root)
         </button>
-        <button type="button" data-potion-preset="regen250" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-slate-600/80 hover:border-cryo-400 text-slate-200 hover:text-cryo-200 transition">
-          Health Regen +250/s (2B + 2BF)
-        </button>
         <button type="button" data-potion-preset="blueBooster" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-slate-600/80 hover:border-cryo-400 text-slate-200 hover:text-cryo-200 transition">
-          Blue Color-Lock + Rare Root (Second Chance)
+          Booster Keeps Color-Lock (250k Root)
         </button>
-        <button type="button" data-potion-preset="redBooster" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-slate-600/80 hover:border-cryo-400 text-slate-200 hover:text-cryo-200 transition">
-          Red Color-Lock + Bulb (Double XP / Attack)
+        <button type="button" data-potion-preset="safetyUnlock" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-amber-500/50 hover:border-amber-300 text-amber-200 transition">
+          i&gt;8 Safety Unlock + Qty 4.0×
+        </button>
+        <button type="button" data-potion-preset="boostersOnly" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-slate-600/80 hover:border-cryo-400 text-slate-200 hover:text-cryo-200 transition">
+          Pure Boosters (All Colors)
+        </button>
+        <button type="button" data-potion-preset="wrongOrderDemo" class="potion-preset-btn px-2.5 py-1.5 rounded-lg text-xs bg-lab-800/95 hover:bg-lab-700 border border-rose-500/50 hover:border-rose-300 text-rose-200 transition">
+          Wrong-Order Recipe Trap
         </button>
       </div>
 
@@ -2431,6 +2431,14 @@
             makeSlotState('BreakBossGetMagic_1', 1, 0.0),
             makeSlotState('BonusComboGem_5', 1, 0.0)
           ];
+        case 'eightFailFallback':
+          // High-value mixed gems that exceed NormalPool maxCost ceilings (~2.5M), forcing all 8 attempts
+          // to fail and trigger the 8-failure fallback (where int(0.2) = 0 leaves non-tier-up rolls at 0% rand).
+          return [
+            makeSlotState('UberElementalGemMax', 0, 0.0),
+            makeSlotState('BreakBossGetSuper_1', 1, 0.0),
+            makeSlotState('BreakBossGetMagic_1', 1, 0.0)
+          ];
         case 'sameUpgrade':
           return [
             makeSlotState('AttackGem', 1, 1.0),
@@ -2442,12 +2450,6 @@
             makeSlotState('UberElementalAttackGem_100', 0, 0),
             makeSlotState('FireGem', 5, 1.0),
             makeSlotState('IceGem', 5, 1.0)
-          ];
-        case 'spectrumDef':
-          return [
-            makeSlotState('Gem3_1', 0, 0),
-            makeSlotState('Gem3_2', 0, 0),
-            makeSlotState('Gem3_3', 0, 0)
           ];
         case 'randomMidTier': {
           const scalable = NORMAL_POOL.filter(g => !g.bUniqueItem && g.tiers.length >= 2);
@@ -5107,12 +5109,31 @@
     document.querySelectorAll('.potion-preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const key = btn.dataset.potionPreset;
-        if (key === 'parryAll') potionState.queue = POTION_RECIPES[5].reagents.slice();
-        else if (key === 'elemDef') potionState.queue = POTION_RECIPES[4].reagents.slice();
-        else if (key === 'darkfire500') potionState.queue = POTION_RECIPES[6].reagents.slice();
-        else if (key === 'regen250') potionState.queue = POTION_RECIPES[3].reagents.slice();
-        else if (key === 'blueBooster') potionState.queue = ['TRA_World_8_Butterfly', 'TRA_World_7_Root', 'TRA_World_7_Root'];
-        else if (key === 'redBooster') potionState.queue = ['TRA_World_6_Mushroom', 'TRA_World_6_Mushroom', 'TRA_World_5_DesertBulb', 'TRA_World_5_DesertBulb'];
+        if (key === 'parryAll') {
+          // Flagship ordered recipe (#6)
+          potionState.queue = POTION_RECIPES[5].reagents.slice();
+        } else if (key === 'darkfire500') {
+          // Flagship 10x Rare Root recipe (#7)
+          potionState.queue = POTION_RECIPES[6].reagents.slice();
+        } else if (key === 'blueBooster') {
+          // Pure Blue color + 250k Rare Root: Booster inflates value without breaking Blue lock
+          potionState.queue = ['TRA_World_2_Berries', 'TRA_World_8_Butterfly', 'TRA_World_7_Root'];
+        } else if (key === 'safetyUnlock') {
+          // 10 items (4.0x multiplier, 1,000,000g value!) with 9 Blue + 1 Green:
+          // High value + Blue lock often hits the i > 8 safety valve and unlocks other colors
+          potionState.queue = [
+            'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly',
+            'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly',
+            'TRA_World_8_Butterfly', 'TRA_World_2_Berries', 'TRA_World_2_Berries',
+            'TRA_World_1_Cactus'
+          ];
+        } else if (key === 'boostersOnly') {
+          // Only PMX_Booster reagents -> no color lock, even mix across all 4 bottle colors
+          potionState.queue = ['TRA_World_5_DesertBulb', 'TRA_World_7_Root'];
+        } else if (key === 'wrongOrderDemo') {
+          // Exact ingredients for Recipe #5 (Elemental Defense) in reversed order to show the warning
+          potionState.queue = POTION_RECIPES[4].reagents.slice().reverse();
+        }
         potionState.expandedOutcomeId = null;
         potionState.outcomeColorFilter = 0;
         potionState.outcomeSearch = '';
