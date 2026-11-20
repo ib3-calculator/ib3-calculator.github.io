@@ -234,6 +234,10 @@
 
           <!-- Gem Forge Header Actions -->
           <div id="gemHeaderActions" class="flex flex-wrap items-center gap-2 text-xs">
+            <button id="btnOpenGemTarget" type="button" class="px-3.5 py-2 rounded-lg bg-gold-500/20 hover:bg-gold-500/30 border border-gold-400/70 text-gold-200 font-semibold transition flex items-center gap-1.5 shadow-[0_0_16px_rgba(212,163,83,0.18)]">
+              <svg class="w-3.5 h-3.5 text-gold-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+              Find Best Fusion
+            </button>
             <button id="btnDeterministicRecipes" type="button" class="px-3.5 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/60 text-emerald-200 font-semibold transition flex items-center gap-1.5 shadow-[0_0_16px_rgba(16,185,129,0.16)]">
               <svg class="w-3.5 h-3.5 text-emerald-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><polyline points="9 10 11 12 15 8"/></svg>
               100% Deterministic Recipes
@@ -254,6 +258,10 @@
 
           <!-- Potion Cauldron Header Actions -->
           <div id="potionHeaderActions" class="hidden flex flex-wrap items-center gap-2 text-xs">
+            <button id="btnOpenPotionTarget" type="button" class="px-3.5 py-2 rounded-lg bg-sky-500/25 hover:bg-sky-500/35 border border-cryo-300/75 text-cryo-100 font-semibold transition flex items-center gap-1.5 shadow-[0_0_18px_rgba(56,189,248,0.22)]">
+              <svg class="w-3.5 h-3.5 text-cryo-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+              Find Best Brew
+            </button>
             <button id="btnPotionRecipes" type="button" class="px-3.5 py-2 rounded-lg bg-cryo-500/20 hover:bg-cryo-500/30 border border-cryo-400/70 text-cryo-200 font-semibold transition flex items-center gap-1.5 shadow-[0_0_18px_rgba(56,189,248,0.2)]">
               <svg class="w-3.5 h-3.5 text-cryo-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><polyline points="9 10 11 12 15 8"/></svg>
               7 Official Potion Recipes
@@ -944,6 +952,122 @@
       <!-- Modal Footer -->
       <div class="px-4 sm:px-5 py-2.5 border-t border-slate-800 bg-lab-950/90 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
         <span class="font-mono">7 hardcoded recipes • 3 recipe-exclusive (ItemRare=100) • 2 order-sensitive</span>
+        <span class="hidden sm:inline">Press <kbd class="px-1.5 py-0.5 rounded bg-lab-800 border border-slate-700 font-mono text-[10px] text-slate-300">ESC</kbd> or click outside to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TOP-LEVEL GEM TARGET FINDER MODAL ("Find Best Fusion")
+       ========================================================================= -->
+  <div id="gemTargetModal" style="z-index: 9999;" class="fixed inset-0 hidden items-center justify-center p-2.5 sm:p-5 bg-black/80 backdrop-blur-sm">
+    <div id="gemTargetDialog" role="dialog" aria-modal="true" aria-labelledby="gemTargetTitle"
+      class="w-full max-w-5xl h-[90vh] flex flex-col rounded-2xl bg-forge-900 border border-gold-500/55 shadow-[0_24px_70px_rgba(0,0,0,0.95)] overflow-hidden">
+
+      <!-- Modal Header -->
+      <div class="px-4 sm:px-5 py-3.5 border-b border-slate-800 bg-forge-950/90 flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-400/60 text-gold-300 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div class="min-w-0">
+            <h2 id="gemTargetTitle" class="font-display text-sm sm:text-base font-bold text-slate-100 tracking-wide truncate">
+              Gem Target Finder <span id="gemTargetModifierBadge" class="ml-1.5 text-[11px] font-mono font-normal text-gold-300"></span>
+            </h2>
+            <p class="text-[11px] text-slate-400 truncate">Pick any of the 152 gems to compute its highest-chance recipe or RNG fusion</p>
+          </div>
+        </div>
+        <button id="btnCloseGemTarget" type="button" aria-label="Close Gem Target Finder"
+          class="p-2 rounded-lg bg-forge-800 hover:bg-forge-700 border border-slate-700 text-slate-300 hover:text-white transition shrink-0">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Two-Pane Responsive Body -->
+      <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+        <!-- Left Pane: Target Gem Selector -->
+        <div class="lg:col-span-5 flex flex-col min-h-0 border-b lg:border-b-0 lg:border-r border-slate-800 bg-forge-950/70 max-h-[38vh] lg:max-h-none">
+          <div class="p-3 border-b border-slate-800 bg-forge-900/90 space-y-2 shrink-0">
+            <div class="relative">
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="gemTargetSearch" type="text" autocomplete="off"
+                placeholder="Search target gem (e.g. BonusComboLenGem, Fire, Light)..."
+                class="w-full pl-9 pr-8 py-2 rounded-lg bg-obsidian border border-slate-700 focus:border-gold-500 focus:outline-none text-xs text-slate-100 placeholder-slate-500" />
+              <button id="btnClearGemTargetSearch" type="button" title="Clear search"
+                class="hidden absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-slate-400 hover:text-slate-100">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <div id="gemTargetShapePills" class="flex flex-wrap items-center gap-1"></div>
+          </div>
+          <div id="gemTargetList" class="flex-1 overflow-y-auto divide-y divide-slate-800/70"></div>
+        </div>
+
+        <!-- Right Pane: Optimal Fusion Output -->
+        <div id="gemTargetResultPane" class="lg:col-span-7 overflow-y-auto p-4 sm:p-5 bg-forge-950/45 space-y-4"></div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-4 sm:px-5 py-2.5 border-t border-slate-800 bg-forge-950/90 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+        <span id="gemTargetStatus" class="font-mono">Select a gem on the left to solve optimal fusion</span>
+        <span class="hidden sm:inline">Press <kbd class="px-1.5 py-0.5 rounded bg-forge-800 border border-slate-700 font-mono text-[10px] text-slate-300">ESC</kbd> or click outside to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TOP-LEVEL POTION TARGET FINDER MODAL ("Find Best Brew")
+       ========================================================================= -->
+  <div id="potionTargetModal" style="z-index: 9999;" class="fixed inset-0 hidden items-center justify-center p-2.5 sm:p-5 bg-black/80 backdrop-blur-sm">
+    <div id="potionTargetDialog" role="dialog" aria-modal="true" aria-labelledby="potionTargetTitle"
+      class="w-full max-w-5xl h-[90vh] flex flex-col rounded-2xl bg-lab-900 border border-cryo-400/55 shadow-[0_24px_70px_rgba(0,0,0,0.95)] overflow-hidden">
+
+      <!-- Modal Header -->
+      <div class="px-4 sm:px-5 py-3.5 border-b border-slate-800 bg-lab-950/90 flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-cryo-500/20 border border-cryo-400/60 text-cryo-300 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div class="min-w-0">
+            <h2 id="potionTargetTitle" class="font-display text-sm sm:text-base font-bold text-slate-100 tracking-wide truncate">
+              Potion Target Finder <span id="potionTargetModifierBadge" class="ml-1.5 text-[11px] font-mono font-normal text-cryo-300"></span>
+            </h2>
+            <p class="text-[11px] text-slate-400 truncate">Pick any of the 89 potions to find its 100% recipe or highest-chance Cauldron brew</p>
+          </div>
+        </div>
+        <button id="btnClosePotionTarget" type="button" aria-label="Close Potion Target Finder"
+          class="p-2 rounded-lg bg-lab-800 hover:bg-lab-700 border border-slate-700 text-slate-300 hover:text-white transition shrink-0">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Two-Pane Responsive Body -->
+      <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+        <!-- Left Pane: Target Potion Selector -->
+        <div class="lg:col-span-5 flex flex-col min-h-0 border-b lg:border-b-0 lg:border-r border-slate-800 bg-lab-950/70 max-h-[38vh] lg:max-h-none">
+          <div class="p-3 border-b border-slate-800 bg-lab-900/90 space-y-2 shrink-0">
+            <div class="relative">
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="potionTargetSearch" type="text" autocomplete="off"
+                placeholder="Search target potion (e.g. Second Chance, Dark Defense, Double XP)..."
+                class="w-full pl-9 pr-8 py-2 rounded-lg bg-obsidian border border-slate-700 focus:border-cryo-400 focus:outline-none text-xs text-slate-100 placeholder-slate-500" />
+              <button id="btnClearPotionTargetSearch" type="button" title="Clear search"
+                class="hidden absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-slate-400 hover:text-slate-100">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <div id="potionTargetColorPills" class="flex flex-wrap items-center gap-1"></div>
+          </div>
+          <div id="potionTargetList" class="flex-1 overflow-y-auto divide-y divide-slate-800/70"></div>
+        </div>
+
+        <!-- Right Pane: Optimal Brew Output -->
+        <div id="potionTargetResultPane" class="lg:col-span-7 overflow-y-auto p-4 sm:p-5 bg-lab-950/45 space-y-4"></div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-4 sm:px-5 py-2.5 border-t border-slate-800 bg-lab-950/90 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+        <span id="potionTargetStatus" class="font-mono">Select a potion on the left to solve optimal brew across all 996 pure-color combos</span>
         <span class="hidden sm:inline">Press <kbd class="px-1.5 py-0.5 rounded bg-lab-800 border border-slate-700 font-mono text-[10px] text-slate-300">ESC</kbd> or click outside to close</span>
       </div>
     </div>
@@ -2505,7 +2629,9 @@
       state.pickerOpen = false;
       modalEl.classList.add('hidden');
       modalEl.classList.remove('flex');
-      document.body.style.overflow = '';
+      if (!state.recipesOpen && !potionState.recipesOpen && !targetFinderState.gemOpen && !targetFinderState.potionOpen) {
+        document.body.style.overflow = '';
+      }
     }
 
     function renderPickerPills() {
@@ -2638,6 +2764,8 @@
         if (state.pickerOpen) closeGemPicker();
         if (state.recipesOpen) closeRecipesModal();
         if (potionState.recipesOpen) closePotionRecipesModal();
+        if (targetFinderState.gemOpen) closeGemTargetModal();
+        if (targetFinderState.potionOpen) closePotionTargetModal();
       }
     });
 
@@ -2723,7 +2851,7 @@
       state.recipesOpen = false;
       recipesModalEl.classList.add('hidden');
       recipesModalEl.classList.remove('flex');
-      if (!state.pickerOpen) {
+      if (!state.pickerOpen && !potionState.recipesOpen && !targetFinderState.gemOpen && !targetFinderState.potionOpen) {
         document.body.style.overflow = '';
       }
     }
@@ -3746,7 +3874,7 @@
       { id: 'TRA_World_6_Mushroom',  enumVal: 36, name: 'Red Mushroom',   short: 'Mushroom',  mixType: 4, cost: 5000,   chips: 20  },
       { id: 'TRA_World_10_Cocoon',   enumVal: 40, name: 'Yellow Cocoon',  short: 'Cocoon',    mixType: 3, cost: 750,    chips: 5   },
       { id: 'TRA_World_11_Bones',    enumVal: 41, name: 'Yellow Bones',   short: 'Bones',     mixType: 3, cost: 7500,   chips: 20  },
-      { id: 'TRA_World_5_DesertBulb',enumVal: 35, name: 'Rare Bulb',    short: 'Bulb',      mixType: 5, cost: 25000,  chips: 50  },
+      { id: 'TRA_World_5_DesertBulb',enumVal: 35, name: 'Rare Bulb',      short: 'Bulb',      mixType: 5, cost: 25000,  chips: 50  },
       { id: 'TRA_World_7_Root',      enumVal: 37, name: 'Rare Root',      short: 'Rare Root', mixType: 5, cost: 250000, chips: 100 }
     ];
     const REAGENT_BY_ID = Object.fromEntries(REAGENTS.map(r => [r.id, r]));
@@ -4963,7 +5091,6 @@
         const brewCost = calculatePotionBrewCost(valInfo.total, potionState.timeModPct);
         const chips = rec.reagents.map((rid, i) => {
           const r = REAGENT_BY_ID[rid];
-          const col = POTION_COLORS[r.mixType];
           return `
             <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-lab-950/95 border border-slate-700/80 text-[11px] text-slate-200">
               ${rec.bRequiresSetOrder ? `<span class="font-mono text-[10px] text-cryo-300 font-bold">${i + 1}.</span>` : ''}
@@ -5017,7 +5144,7 @@
       potionState.recipesOpen = false;
       potionRecipesModalEl.classList.add('hidden');
       potionRecipesModalEl.classList.remove('flex');
-      if (!state.pickerOpen && !state.recipesOpen) {
+      if (!state.pickerOpen && !state.recipesOpen && !targetFinderState.gemOpen && !targetFinderState.potionOpen) {
         document.body.style.overflow = '';
       }
     }
@@ -5120,13 +5247,13 @@
           // Pure Blue color + 250k Rare Root: Booster inflates value without breaking Blue lock
           potionState.queue = ['TRA_World_2_Berries', 'TRA_World_8_Butterfly', 'TRA_World_7_Root'];
         } else if (key === 'safetyUnlock') {
-          // 10 items (4.0x multiplier, 1,000,000g value!) with 9 Blue + 1 Green:
-          // High value + Blue lock often hits the i > 8 safety valve and unlocks other colors
+          // 1 Red Flower + 9 Rare Root (10 items -> 4.0x = 9,002,000g): keeps Red color-lock while
+          // exceeding the 1M tier-cost clamp so attempts 0..8 fail and trigger the i > 8 safety unlock
           potionState.queue = [
-            'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly',
-            'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly', 'TRA_World_8_Butterfly',
-            'TRA_World_8_Butterfly', 'TRA_World_2_Berries', 'TRA_World_2_Berries',
-            'TRA_World_1_Cactus'
+            'TRA_World_3_PinkPlant',
+            'TRA_World_7_Root', 'TRA_World_7_Root', 'TRA_World_7_Root',
+            'TRA_World_7_Root', 'TRA_World_7_Root', 'TRA_World_7_Root',
+            'TRA_World_7_Root', 'TRA_World_7_Root', 'TRA_World_7_Root'
           ];
         } else if (key === 'boostersOnly') {
           // Only PMX_Booster reagents -> no color lock, even mix across all 4 bottle colors
@@ -5239,6 +5366,1268 @@
       const id = row.dataset.potionOutcomeRow;
       potionState.expandedOutcomeId = potionState.expandedOutcomeId === id ? null : id;
       renderPotionOutcomesTable();
+    });
+
+    // =========================================================================
+    // 14. REVERSE TARGET FINDERS (BEST GEM FUSION & BEST POTION BREW SOLVERS)
+    // =========================================================================
+    const targetFinderState = {
+      gemOpen: false,
+      gemSearch: '',
+      gemShapeFilter: 0,
+      selectedGemId: 'BonusComboLenGem',
+      gemSolutions: [],
+      potionOpen: false,
+      potionSearch: '',
+      potionColorFilter: 0, // 0 = All, 99 = Potions Only, 1..4 = Bottle Color
+      selectedPotionId: 'Potion_SecondChance',
+      potionSolutions: []
+    };
+
+    // -------------------------------------------------------------------------
+    // 14A. GEM FORGE REVERSE OPTIMIZER
+    // -------------------------------------------------------------------------
+    function findBestGemFusion(targetGemId) {
+      const t0 = performance.now();
+      const targetGem = GEM_BY_ID[targetGemId];
+      const cookBoostPerk = state.cookBoostPerk;
+      const craftTimeModPct = state.craftTimeModPct;
+      const maxGemShapeCap = state.maxGemShapeCap;
+
+      // 1. Check 100% Deterministic Creation Recipes first
+      const creationRecipes = DETERMINISTIC_RECIPES.filter(
+        r => r.outputId === targetGemId && r.category !== 'sameGem' && r.category !== 'uberUpgrades'
+      );
+      const upgradeRecipes = DETERMINISTIC_RECIPES.filter(
+        r => r.outputId === targetGemId && r.category === 'uberUpgrades'
+      );
+
+      if (creationRecipes.length > 0) {
+        const solutions = creationRecipes.map((rec, i) => {
+          const insts = rec.inputs.map(inp => ({ gem: GEM_BY_ID[inp.id], tier: inp.tier, randPct: inp.randPct }));
+          const timing = calculateCookTimeAndChips(insts, craftTimeModPct);
+          return {
+            tag: i === 0 ? '100% Guaranteed Recipe' : 'Alternative 100% Recipe',
+            isDeterministic: true,
+            prob: 100,
+            inputs: rec.inputs,
+            enableCookBoost: rec.enableCookBoost,
+            hours: timing.hours,
+            chips: timing.chips,
+            totalInputCost: timing.totalValue,
+            statRangeText: rec.statBadge,
+            explanation: `${rec.cookVar}: ${rec.note}`
+          };
+        });
+        if (upgradeRecipes.length > 0) {
+          const uRec = upgradeRecipes[0];
+          const insts = uRec.inputs.map(inp => ({ gem: GEM_BY_ID[inp.id], tier: inp.tier, randPct: inp.randPct }));
+          const timing = calculateCookTimeAndChips(insts, craftTimeModPct);
+          solutions.push({
+            tag: '100% Upgrade Existing Copy',
+            isDeterministic: true,
+            isUpgrade: true,
+            prob: 100,
+            inputs: uRec.inputs,
+            enableCookBoost: false,
+            hours: timing.hours,
+            chips: timing.chips,
+            totalInputCost: timing.totalValue,
+            statRangeText: uRec.statBadge,
+            explanation: `Once you own ${targetGem.friendlyName}, use ${uRec.cookVar} to boost its stat every cook. ${uRec.note}`
+          });
+        }
+        return {
+          targetGem,
+          obtainableFromScratch: true,
+          solutions,
+          elapsedMs: performance.now() - t0
+        };
+      }
+
+      // 2. Non-forgeable Rare (ItemRare === 100) Gems without creation recipes
+      if (targetGem.itemRare === 100) {
+        const solutions = [];
+        for (const uRec of upgradeRecipes) {
+          const insts = uRec.inputs.map(inp => ({ gem: GEM_BY_ID[inp.id], tier: inp.tier, randPct: inp.randPct }));
+          const timing = calculateCookTimeAndChips(insts, craftTimeModPct);
+          solutions.push({
+            tag: '100% Upgrade Existing Copy',
+            isDeterministic: true,
+            isUpgrade: true,
+            prob: 100,
+            inputs: uRec.inputs,
+            enableCookBoost: false,
+            hours: timing.hours,
+            chips: timing.chips,
+            totalInputCost: timing.totalValue,
+            statRangeText: uRec.statBadge,
+            explanation: `Cannot be created from scratch in the Gem Forge, but once obtained, ${uRec.cookVar} upgrades it deterministically. ${uRec.note}`
+          });
+        }
+        let uncraftableNote = `${targetGem.friendlyName} has ItemRare=100 and no creation recipe in CheckForGemRecipes(), so it is excluded from the random Gem Forge pool. Obtain it from treasure maps, chests, Prize Wheel, or special drops.`;
+        if (targetGem.id === 'UberElementalAttackGem') {
+          uncraftableNote += ' (Tip: You can brew its temporary Potion version 100% deterministically in the Cauldron using 10× Rare Root!)';
+        }
+        return {
+          targetGem,
+          obtainableFromScratch: false,
+          uncraftableNote,
+          solutions,
+          elapsedMs: performance.now() - t0
+        };
+      }
+
+      // 3. Normal Pool Gem (ItemRare === 0): Multi-strategy exact-engine optimizer
+      const boostDiv = cookBoostPerk ? 1.75 : 1.0;
+      const gMaxActualCost = targetGem.bUniqueItem
+        ? targetGem.cost
+        : getCost(targetGem, targetGem.tiers.length, targetGem.maxRand, true);
+      const maxAllowedFloor = gMaxActualCost - 1;
+      const maxRawFloor = Math.floor(maxAllowedFloor / boostDiv);
+
+      if (maxRawFloor < 180) {
+        return {
+          targetGem,
+          obtainableFromScratch: false,
+          uncraftableNote: `With Gem Cook Boost (1.75×) enabled, no 3-gem input combination produces a MaxGemValue floor below ${formatGold(gMaxActualCost)}g. Disable Gem Cook Boost to forge this gem.`,
+          solutions: [],
+          elapsedMs: performance.now() - t0
+        };
+      }
+
+      // Build compact input palettes (excluding targetGem & ItemRare===100)
+      function buildEntriesForGems(gemList) {
+        const entries = [];
+        for (const g of gemList) {
+          if (g.id === targetGemId || g.itemRare !== 0) continue;
+          const randSteps = g.bUniqueItem || g.maxRand === 0 ? [0] : [0, g.maxRand * 0.5, g.maxRand];
+          for (let t = 0; t <= g.tiers.length; t++) {
+            for (const r of randSteps) {
+              const c = getCost(g, t, r, true);
+              if (c <= maxRawFloor) {
+                entries.push({ id: g.id, gem: g, tier: t, randPct: r, cost: c });
+              }
+            }
+          }
+        }
+        entries.sort((a, b) => a.cost - b.cost);
+        return entries;
+      }
+
+      const sameShapeGems = NORMAL_POOL.filter(g => g.shape === targetGem.shape && g.id !== targetGemId);
+      const sameShapeEntries = buildEntriesForGems(sameShapeGems);
+
+      // Curated cross-shape palette covering the full cost spectrum (180g to 12.555M)
+      const anchorIds = [
+        'MagicGem', 'ShieldGem', 'HealthGem', 'AttackGem', 'FireGem', 'StabAttackGem',
+        'ItemDropGem_3', 'ItemDropGem_1', 'ItemDropGem_2', 'ComboGem_2', 'BlockGem_1',
+        'ParryGem_2', 'HitGem_1', 'UberMagic_2', 'UberBossGem_1', 'UberBossGem_2',
+        'UberBossGem_3', 'FinalHitGem_3', 'BonusComboGem_3', 'BonusComboGem_5',
+        'UberTakeHitGem_1', 'BreakBossGetMagic_1', 'BreakBossGetSuper_1',
+        'LightGem_6', 'HeavyGem_6', 'DualGem_6', 'GreatParryAllGem', 'BonusComboLenGem'
+      ];
+      const globalAnchorGems = anchorIds.map(id => GEM_BY_ID[id]).filter(Boolean);
+      const globalEntries = buildEntriesForGems([...sameShapeGems, ...globalAnchorGems]);
+
+      // Target sweet-spot raw floor values
+      const rawTargetSet = [];
+      for (let t = targetGem.tiers.length; t >= 0; t--) {
+        const ct = targetGem.tierCosts[t];
+        const ctMax = targetGem.bUniqueItem ? targetGem.cost : getCost(targetGem, t, targetGem.maxRand, true);
+        for (const mult of [0.985, 0.85, 0.68]) {
+          rawTargetSet.push(Math.floor(((ctMax - 1) / boostDiv) * mult));
+        }
+        for (const mult of [0.98, 0.72, 0.45]) {
+          rawTargetSet.push(Math.floor(((ct - 1) / boostDiv) * mult));
+        }
+      }
+      if (maxRawFloor > 900000) {
+        rawTargetSet.push(Math.min(maxRawFloor, 980000));
+        rawTargetSet.push(Math.min(maxRawFloor, 1500000));
+        rawTargetSet.push(Math.min(maxRawFloor, 2400000));
+      }
+      rawTargetSet.sort((a, b) => b - a);
+
+      const rawTargets = [];
+      for (const v of rawTargetSet) {
+        if (v < 180 || v > maxRawFloor) continue;
+        if (rawTargets.length === 0 || rawTargets[rawTargets.length - 1] - v > rawTargets[rawTargets.length - 1] * 0.08) {
+          rawTargets.push(v);
+        }
+      }
+      if (rawTargets.length === 0) rawTargets.push(maxRawFloor);
+
+      function pickClosest(entries, targetCost, excludeSet, preferIdSet = null) {
+        let best = null;
+        let bestScore = Infinity;
+        for (let i = 0; i < entries.length; i++) {
+          const e = entries[i];
+          if (excludeSet && excludeSet.has(e.id)) continue;
+          const relDiff = Math.abs(e.cost - targetCost) / Math.max(targetCost, 100);
+          const prefBonus = preferIdSet && preferIdSet.has(e.id) ? -0.18 : 0;
+          const score = relDiff + prefBonus;
+          if (score < bestScore) {
+            bestScore = score;
+            best = e;
+          }
+        }
+        return best;
+      }
+
+      const candidateMap = new Map();
+      function tryAddCombo(e0, e1, e2, stratLabel) {
+        if (!e0 || !e1 || !e2) return;
+        const arr = [e0, e1, e2];
+        const insts = arr.map(e => ({ gem: e.gem, tier: e.tier, randPct: e.randPct }));
+        const rec = classifyRecipe(insts, cookBoostPerk);
+        if (rec.matched && (!rec.targetGem || rec.targetGem.id !== targetGemId)) return;
+        if (checkInvalidCookCombo(insts, rec).invalid) return;
+
+        // Verify MaxGemValue < gMaxActualCost
+        const c0 = e0.cost, c1 = e1.cost, c2 = e2.cost;
+        let floor = Math.max(c0, c1, c2, Math.trunc((c0 + c1 + c2) * 0.65));
+        if (cookBoostPerk) floor = Math.trunc(floor * 1.75);
+        if (floor >= gMaxActualCost) return;
+
+        const sig = arr
+          .map(e => `${e.id}:${e.tier}:${Math.round(e.randPct * 100)}`)
+          .sort()
+          .join('|');
+        if (!candidateMap.has(sig)) {
+          candidateMap.set(sig, {
+            inputs: arr.map(e => ({ id: e.id, tier: e.tier, randPct: e.randPct })),
+            insts,
+            totalCost: c0 + c1 + c2,
+            sameShape: e0.gem.shape === targetGem.shape && e1.gem.shape === targetGem.shape && e2.gem.shape === targetGem.shape,
+            stratLabel
+          });
+        }
+      }
+
+      for (const rawV of rawTargets.slice(0, 14)) {
+        const effFloor = Math.trunc(rawV * boostDiv);
+        // Identify active same-shape competitors to ban as inputs
+        const competitors = new Set(
+          sameShapeGems
+            .filter(g => g.maxCost >= effFloor && g.cost <= effFloor * 3.5)
+            .map(g => g.id)
+        );
+
+        // Strategy 1: Same-shape, 3 distinct competitors (1 anchor + 2 balanced)
+        if (sameShapeEntries.length >= 3) {
+          const ex1 = new Set();
+          const a1 = pickClosest(sameShapeEntries, rawV * 0.96, ex1, competitors);
+          if (a1) {
+            ex1.add(a1.id);
+            const b1 = pickClosest(sameShapeEntries, rawV * 0.45, ex1, competitors);
+            if (b1) {
+              ex1.add(b1.id);
+              const c1 = pickClosest(sameShapeEntries, Math.max(180, rawV * 0.35), ex1, competitors);
+              tryAddCombo(a1, b1, c1, 'Shape-Locked Competitor Ban');
+            }
+          }
+
+          // Strategy 2: Same-shape, 3 distinct balanced (~0.50 * rawV each)
+          const ex2 = new Set();
+          const a2 = pickClosest(sameShapeEntries, rawV * 0.51, ex2, competitors);
+          if (a2) {
+            ex2.add(a2.id);
+            const b2 = pickClosest(sameShapeEntries, rawV * 0.50, ex2, competitors);
+            if (b2) {
+              ex2.add(b2.id);
+              const c2 = pickClosest(sameShapeEntries, rawV * 0.48, ex2, competitors);
+              tryAddCombo(a2, b2, c2, 'Shape-Locked Balanced');
+            }
+          }
+
+          // Strategy 3: Same-shape, 1 high anchor + 2 cheapest distinct same-shape
+          const ex3 = new Set();
+          const a3 = pickClosest(sameShapeEntries, rawV * 0.99, ex3, competitors);
+          if (a3) {
+            ex3.add(a3.id);
+            const b3 = pickClosest(sameShapeEntries, 200, ex3, null);
+            if (b3) {
+              ex3.add(b3.id);
+              const c3 = pickClosest(sameShapeEntries, 200, ex3, null);
+              tryAddCombo(a3, b3, c3, 'Shape-Locked High Anchor');
+            }
+          }
+
+          // Strategy 4: Same-shape, 2 identical anchor + 1 different (safe when 3 distinct aren't in bracket)
+          if (a3) {
+            const b4 = pickClosest(sameShapeEntries, Math.max(200, rawV * 0.2), new Set([a3.id]), null);
+            if (b4) tryAddCombo(a3, a3, b4, 'Shape-Locked Dual Anchor');
+          }
+        }
+
+        // Strategy 5: Cross-shape high anchor + 2 cheap distinct (crucial for 12.555M BonusComboLenGem, etc.)
+        const exG = new Set();
+        const ga = pickClosest(globalEntries, rawV * 0.995, exG, null);
+        if (ga) {
+          exG.add(ga.id);
+          const gb = pickClosest(globalEntries, Math.max(200, rawV * 0.08), exG, null);
+          if (gb) {
+            exG.add(gb.id);
+            const gc = pickClosest(globalEntries, Math.max(200, rawV * 0.06), exG, null);
+            tryAddCombo(ga, gb, gc, 'Cross-Shape High Floor');
+          }
+        }
+      }
+
+      // Stage 1: Fast screen (500 iterations per candidate)
+      const candidates = Array.from(candidateMap.values()).slice(0, 60);
+      const screened = [];
+      for (const cand of candidates) {
+        const res = runForgeSimulation(cand.insts, {
+          cookBoostPerk,
+          craftTimeModPct,
+          iterations: 500,
+          maxGemShapeCap
+        });
+        const hit = res.outcomes.find(o => o.gem.id === targetGemId);
+        const prob = hit ? hit.prob : 0;
+        if (prob > 0) {
+          screened.push({ cand, prob, res, hit });
+        }
+      }
+
+      screened.sort((a, b) => (b.prob - a.prob) || (a.cand.totalCost - b.cand.totalCost));
+
+      // Select top 5 by probability + 1 budget candidate (if significantly cheaper with solid odds)
+      const finalists = screened.slice(0, 5);
+      if (screened.length > 5 && finalists.length > 0) {
+        const topProb = finalists[0].prob;
+        const topCost = finalists[0].cand.totalCost;
+        const budget = screened
+          .slice(5)
+          .filter(x => x.prob >= topProb * 0.65 && x.cand.totalCost < topCost * 0.45)
+          .sort((a, b) => a.cand.totalCost - b.cand.totalCost)[0];
+        if (budget) finalists.push(budget);
+      }
+
+      // Stage 2: High-precision verification (10,000 iterations)
+      const verified = [];
+      for (const f of finalists) {
+        const res = runForgeSimulation(f.cand.insts, {
+          cookBoostPerk,
+          craftTimeModPct,
+          iterations: 10000,
+          maxGemShapeCap
+        });
+        const hit = res.outcomes.find(o => o.gem.id === targetGemId);
+        if (!hit || hit.prob <= 0) continue;
+
+        const statRangeText = hit.minStat === hit.maxStat
+          ? formatStatValue(targetGem, hit.minStat)
+          : `${formatStatValue(targetGem, hit.minStat)} – ${formatStatValue(targetGem, hit.maxStat)}`;
+
+        const distinctInputs = new Set(f.cand.inputs.map(x => x.id)).size;
+        const lockNote = f.cand.sameShape && res.shapeLockBreakRolls === 0
+          ? `Locks ${SHAPES[targetGem.shape].name} shape`
+          : (res.shapeLockBreakRolls > 0 ? 'Bypasses shape-lock via high MaxGemValue ceiling' : 'Uses high MaxGemValue floor to trim pool');
+
+        verified.push({
+          tag: '',
+          isDeterministic: false,
+          prob: hit.prob,
+          inputs: f.cand.inputs,
+          enableCookBoost: false,
+          hours: res.hours,
+          chips: res.chips,
+          totalInputCost: res.totalValue,
+          maxGemValue: res.maxGemValue,
+          statRangeText,
+          outcomeCount: res.outcomes.length,
+          explanation: `${lockNote} (Floor ${formatCompactGold(res.maxGemValue)}g, ${res.outcomes.length} possible outputs) and bans ${distinctInputs} competing gem${distinctInputs > 1 ? 's' : ''} as inputs.`
+        });
+      }
+
+      verified.sort((a, b) => (b.prob - a.prob) || (a.totalInputCost - b.totalInputCost));
+
+      // Pick Best + up to 2 distinct alternatives
+      const solutions = [];
+      if (verified.length > 0) {
+        verified[0].tag = 'Highest Chance Fusion';
+        solutions.push(verified[0]);
+
+        // Add cheapest meaningful alternative if different enough
+        const cheaper = verified
+          .slice(1)
+          .filter(v => v.totalInputCost < verified[0].totalInputCost * 0.72)
+          .sort((a, b) => (b.prob - a.prob))[0];
+        if (cheaper) {
+          cheaper.tag = 'Lower-Cost Alternative';
+          solutions.push(cheaper);
+        }
+
+        // Add runner-up
+        const runnerUp = verified.slice(1).find(v => !solutions.includes(v));
+        if (runnerUp && solutions.length < 3) {
+          runnerUp.tag = 'Runner-Up Fusion';
+          solutions.push(runnerUp);
+        }
+      }
+
+      // If gem is scalable (non-unique), also append an optional "Already Own 3? Upgrade Stat" card
+      if (!targetGem.bUniqueItem && targetGem.tiers.length > 0) {
+        const sampleTier = Math.max(0, targetGem.tiers.length - 2);
+        const inp = [
+          { id: targetGem.id, tier: sampleTier, randPct: 0 },
+          { id: targetGem.id, tier: sampleTier, randPct: 0 },
+          { id: targetGem.id, tier: sampleTier, randPct: 0 }
+        ];
+        const insts = inp.map(x => ({ gem: targetGem, tier: x.tier, randPct: 0 }));
+        const timing = calculateCookTimeAndChips(insts, craftTimeModPct);
+        solutions.push({
+          tag: 'Upgrade Existing (Same-Gem)',
+          isDeterministic: true,
+          isUpgrade: true,
+          prob: 100,
+          inputs: inp,
+          enableCookBoost: false,
+          hours: timing.hours,
+          chips: timing.chips,
+          totalInputCost: timing.totalValue,
+          statRangeText: `T${sampleTier} → T${Math.min(sampleTier + 1, targetGem.tiers.length)}`,
+          explanation: `Already own 3 copies? Fusing 3× ${targetGem.friendlyName} guarantees the same gem back with upgraded tier/stat (100% max-roll with Gem Cook Boost).`
+        });
+      }
+
+      return {
+        targetGem,
+        obtainableFromScratch: solutions.some(s => !s.isUpgrade),
+        solutions,
+        elapsedMs: performance.now() - t0
+      };
+    }
+
+    // -------------------------------------------------------------------------
+    // 14B. POTION CAULDRON REVERSE OPTIMIZER (ALL 996 PURE-COLOR + BOOSTER COMBOS)
+    // -------------------------------------------------------------------------
+    const PURE_COLOR_BREW_CACHE = {};
+
+    function getPureColorBrewCatalog(potionType) {
+      if (PURE_COLOR_BREW_CACHE[potionType]) return PURE_COLOR_BREW_CACHE[potionType];
+
+      const colorReagents = REAGENTS.filter(r => r.mixType === potionType).sort((a, b) => a.cost - b.cost);
+      const cheap = colorReagents[0];
+      const mid = colorReagents[1];
+      const bulb = REAGENT_BY_ID['TRA_World_5_DesertBulb'];
+      const root = REAGENT_BY_ID['TRA_World_7_Root'];
+
+      // Enumerate all 996 multisets of size 2..10 with at least 1 non-booster reagent of potionType
+      // Group by exact MaxPotionValue and keep the cheapest/fewest-booster representative
+      const byValue = new Map();
+
+      for (let total = 2; total <= 10; total++) {
+        const mult = getReagentQtyMultiplier(total);
+        for (let nRoot = 0; nRoot <= total - 1; nRoot++) {
+          for (let nBulb = 0; nBulb <= total - 1 - nRoot; nBulb++) {
+            const rem = total - nRoot - nBulb; // >= 1 non-booster guaranteed
+            for (let nMid = 0; nMid <= rem; nMid++) {
+              const nCheap = rem - nMid;
+              const baseSum = nCheap * cheap.cost + nMid * mid.cost + nBulb * bulb.cost + nRoot * root.cost;
+              const cauldronVal = Math.trunc(baseSum * mult);
+
+              const queue = [];
+              for (let k = 0; k < nCheap; k++) queue.push(cheap.id);
+              for (let k = 0; k < nMid; k++) queue.push(mid.id);
+              for (let k = 0; k < nBulb; k++) queue.push(bulb.id);
+              for (let k = 0; k < nRoot; k++) queue.push(root.id);
+
+              // Skip combos that accidentally trigger a hardcoded official recipe
+              const recCheck = checkPotionRecipeMatch(queue);
+              if (recCheck.matched) continue;
+
+              // Prefer fewer boosters, then lower baseSum, then fewer total reagents
+              const costRank = nRoot * 1e9 + nBulb * 1e7 + baseSum * 10 + total;
+              const existing = byValue.get(cauldronVal);
+              if (!existing || costRank < existing.costRank) {
+                byValue.set(cauldronVal, {
+                  cauldronVal,
+                  baseSum,
+                  mult,
+                  total,
+                  reagents: queue,
+                  costRank
+                });
+              }
+            }
+          }
+        }
+      }
+
+      const catalog = Array.from(byValue.values()).sort((a, b) => a.cauldronVal - b.cauldronVal);
+      PURE_COLOR_BREW_CACHE[potionType] = catalog;
+      return catalog;
+    }
+
+    function findBestPotionBrew(targetPotionId) {
+      const t0 = performance.now();
+      const targetItem = POTION_BY_ID[targetPotionId];
+      const timeModPct = potionState.timeModPct;
+      const boostPerk = potionState.boostPerk;
+      const extraFightsPerk = potionState.extraFightsPerk;
+
+      // 1. Check Official 100% Hardcoded Recipes
+      const officialMatches = POTION_RECIPES.filter(r => r.resultId === targetPotionId);
+      const solutions = [];
+
+      if (officialMatches.length > 0) {
+        // Sort highest tier first (so Recipe #4 T3 Health Regen leads over #3 and #2)
+        const sortedRecs = officialMatches.slice().sort((a, b) => b.resultTier - a.resultTier);
+        sortedRecs.forEach((rec, idx) => {
+          const valInfo = getReagentsValue(rec.reagents);
+          const brewCost = calculatePotionBrewCost(valInfo.total, timeModPct);
+          solutions.push({
+            tag: idx === 0 ? `100% Official Recipe #${rec.index}` : `Official Recipe #${rec.index}`,
+            isDeterministic: true,
+            bRequiresSetOrder: rec.bRequiresSetOrder,
+            prob: 100,
+            reagents: rec.reagents.slice(),
+            cauldronVal: valInfo.total,
+            baseSum: valInfo.baseSum,
+            qtyMult: valInfo.mult,
+            brewCost,
+            statRangeText: rec.effectBadge,
+            explanation: rec.note
+          });
+        });
+
+        // If recipe-only (ItemRare === 100), return immediately
+        if (targetItem.itemRare === 100) {
+          return {
+            targetItem,
+            solutions,
+            elapsedMs: performance.now() - t0
+          };
+        }
+      }
+
+      // 2. Analytical pre-scoring across ALL distinct pure-color + booster Cauldron Values
+      const color = targetItem.potionType;
+      const catalog = getPureColorBrewCatalog(color);
+      const pMaxActualCost = targetItem.bUniqueItem
+        ? targetItem.cost
+        : getCost(targetItem, targetItem.tiers.length, targetItem.maxRand, true);
+
+      const scaleSamples = [1.1 / 3.333, 1.21 / 3.333, 1.325 / 3.333, 1.44 / 3.333, 1.55 / 3.333];
+      const sameColorPool = NORMAL_POTION_POOL.filter(p => p.potionType === color);
+      const analyticalRanked = [];
+
+      for (let i = 0; i < catalog.length; i++) {
+        const entry = catalog[i];
+        const M = entry.cauldronVal;
+        const minCostFloor = M / 10.0;
+        if (pMaxActualCost <= minCostFloor) continue;
+
+        const forcedMinVal = Math.trunc(M * 0.65);
+        let scoreSum = 0;
+
+        for (let sIdx = 0; sIdx < scaleSamples.length; sIdx++) {
+          const sc = scaleSamples[sIdx];
+          let sv = Math.trunc(M * sc);
+          if (sv <= forcedMinVal * sc) sv = Math.trunc(forcedMinVal * sc * 1.1);
+          const tMin = sv;
+          const tMax = Math.trunc(sv * 100.0);
+
+          if (targetItem.cost > tMax) continue;
+
+          let prefCount = 0;
+          let targetInPref = false;
+          let validColorCount = 0;
+
+          for (let j = 0; j < sameColorPool.length; j++) {
+            const cand = sameColorPool[j];
+            if (cand.maxCost < minCostFloor || cand.cost > tMax) continue;
+            if (getCostCloseToValue(cand, tMin, tMax) >= 0) {
+              prefCount++;
+              if (cand.id === targetPotionId) targetInPref = true;
+            } else {
+              validColorCount++;
+            }
+          }
+
+          if (targetInPref && prefCount > 0) {
+            scoreSum += 1.0 / prefCount;
+          } else if (prefCount === 0 && validColorCount > 0) {
+            // Valid fallback across all colors
+            scoreSum += 0.25 / validColorCount;
+          }
+        }
+
+        if (scoreSum > 0) {
+          analyticalRanked.push({ entry, estProb: (scoreSum / scaleSamples.length) * 100 });
+        }
+      }
+
+      analyticalRanked.sort((a, b) => (b.estProb - a.estProb) || (a.entry.baseSum - b.entry.baseSum));
+
+      // Select top 20 analytical peaks + 6 spaced values across the eligible range to catch any multi-attempt cascade peaks
+      const screenPool = [];
+      const seenVals = new Set();
+      for (const item of analyticalRanked.slice(0, 22)) {
+        screenPool.push(item.entry);
+        seenVals.add(item.entry.cauldronVal);
+      }
+      const eligibleCatalog = catalog.filter(e => e.cauldronVal / 10.0 < pMaxActualCost);
+      if (eligibleCatalog.length > 0) {
+        for (let k = 0; k < 6; k++) {
+          const idx = Math.min(eligibleCatalog.length - 1, Math.floor((k / 5) * (eligibleCatalog.length - 1)));
+          const e = eligibleCatalog[idx];
+          if (!seenVals.has(e.cauldronVal)) {
+            seenVals.add(e.cauldronVal);
+            screenPool.push(e);
+          }
+        }
+      }
+
+      // Stage 1: Fast exact simulation screen (600 runs each)
+      const screened = [];
+      for (const entry of screenPool) {
+        const res = runPotionSimulation(entry.reagents, {
+          iterations: 600,
+          timeModPct,
+          boostPerk,
+          extraFightsPerk
+        });
+        const hit = res.outcomes.find(o => o.item.id === targetPotionId);
+        if (hit && hit.prob > 0) {
+          screened.push({ entry, prob: hit.prob });
+        }
+      }
+
+      screened.sort((a, b) => (b.prob - a.prob) || (a.entry.baseSum - b.entry.baseSum));
+
+      // Pick top 5 + 1 budget/fast candidate
+      const finalists = screened.slice(0, 5);
+      if (screened.length > 5 && finalists.length > 0) {
+        const topProb = finalists[0].prob;
+        const topBase = finalists[0].entry.baseSum;
+        const budget = screened
+          .slice(5)
+          .filter(x => x.prob >= topProb * 0.7 && x.entry.baseSum < topBase * 0.45)
+          .sort((a, b) => a.entry.baseSum - b.entry.baseSum)[0];
+        if (budget) finalists.push(budget);
+      }
+
+      // Stage 2: High-precision verification (10,000 runs)
+      const verified = [];
+      for (const f of finalists) {
+        const res = runPotionSimulation(f.entry.reagents, {
+          iterations: 10000,
+          timeModPct,
+          boostPerk,
+          extraFightsPerk
+        });
+        const hit = res.outcomes.find(o => o.item.id === targetPotionId);
+        if (!hit || hit.prob <= 0) continue;
+
+        const statRangeText = hit.minStat === hit.maxStat
+          ? formatPotionEffectValue(targetItem, hit.minStat)
+          : `${formatPotionEffectValue(targetItem, hit.minStat)} – ${formatPotionEffectValue(targetItem, hit.maxStat)}`;
+
+        const colName = POTION_COLORS[color].name;
+        const boosterNote = res.boosterCount > 0
+          ? `Boosters (${res.boosterCount}) inflate Cauldron Value to ${formatGold(res.maxPotionValue)}g then strip out so ${colName} color-lock stays intact.`
+          : `Pure ${colName} reagents lock ForcePotionType=${color} with Cauldron Value ${formatGold(res.maxPotionValue)}g.`;
+
+        verified.push({
+          tag: '',
+          isDeterministic: false,
+          bRequiresSetOrder: false,
+          prob: hit.prob,
+          reagents: f.entry.reagents.slice(),
+          cauldronVal: res.maxPotionValue,
+          baseSum: res.baseSum,
+          qtyMult: res.qtyMult,
+          brewCost: res.brewCost,
+          statRangeText,
+          outcomeCount: res.outcomes.length,
+          explanation: `${boosterNote} Cuts floor to ${formatGold(res.minCostFloor)}g (${res.outcomes.length} possible outputs in pool).`
+        });
+      }
+
+      verified.sort((a, b) => (b.prob - a.prob) || (a.baseSum - b.baseSum));
+
+      if (verified.length > 0) {
+        verified[0].tag = solutions.length > 0 ? 'Highest RNG Brew (Higher Tiers)' : 'Highest Chance Brew';
+        solutions.push(verified[0]);
+
+        const budgetOpt = verified
+          .slice(1)
+          .filter(v => v.baseSum < verified[0].baseSum * 0.65)
+          .sort((a, b) => b.prob - a.prob)[0];
+        if (budgetOpt) {
+          budgetOpt.tag = 'Budget / Faster Brew';
+          solutions.push(budgetOpt);
+        }
+
+        const runner = verified.slice(1).find(v => !solutions.includes(v));
+        if (runner && solutions.length < (officialMatches.length > 0 ? officialMatches.length + 2 : 3)) {
+          runner.tag = 'Runner-Up Brew';
+          solutions.push(runner);
+        }
+      }
+
+      return {
+        targetItem,
+        solutions,
+        elapsedMs: performance.now() - t0
+      };
+    }
+
+    // -------------------------------------------------------------------------
+    // 14C. GEM TARGET FINDER MODAL UI CONTROLLER
+    // -------------------------------------------------------------------------
+    const gemTargetModalEl = document.getElementById('gemTargetModal');
+    const gemTargetSearchEl = document.getElementById('gemTargetSearch');
+    const gemTargetClearBtn = document.getElementById('btnClearGemTargetSearch');
+    const gemTargetPillsEl = document.getElementById('gemTargetShapePills');
+    const gemTargetListEl = document.getElementById('gemTargetList');
+    const gemTargetResultEl = document.getElementById('gemTargetResultPane');
+    const gemTargetStatusEl = document.getElementById('gemTargetStatus');
+
+    function openGemTargetModal() {
+      targetFinderState.gemOpen = true;
+      targetFinderState.gemSearch = '';
+      targetFinderState.gemShapeFilter = 0;
+      gemTargetSearchEl.value = '';
+      gemTargetClearBtn.classList.add('hidden');
+      document.getElementById('gemTargetModifierBadge').textContent =
+        `• Cook Boost: ${state.cookBoostPerk ? 'ON (1.75×)' : 'OFF'}${state.maxGemShapeCap < 8 ? ` • Cap 1–${state.maxGemShapeCap}` : ''}`;
+
+      renderGemTargetPills();
+      renderGemTargetList();
+      solveAndRenderGemTarget(targetFinderState.selectedGemId);
+
+      gemTargetModalEl.classList.remove('hidden');
+      gemTargetModalEl.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => gemTargetSearchEl.focus());
+    }
+
+    function closeGemTargetModal() {
+      if (!targetFinderState.gemOpen) return;
+      targetFinderState.gemOpen = false;
+      gemTargetModalEl.classList.add('hidden');
+      gemTargetModalEl.classList.remove('flex');
+      if (!state.pickerOpen && !state.recipesOpen && !potionState.recipesOpen && !targetFinderState.potionOpen) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function renderGemTargetPills() {
+      const allActive = targetFinderState.gemShapeFilter === 0;
+      let html = `
+        <button type="button" data-gt-shape="0"
+          class="px-2 py-1 rounded-md text-[11px] font-medium border transition ${allActive ? 'bg-gold-500/25 border-gold-400 text-gold-200 font-semibold' : 'bg-forge-800 border-slate-700 text-slate-300 hover:border-slate-500'}">
+          All (${ALL_GEMS.length})
+        </button>
+      `;
+      for (let s = 1; s <= 8; s++) {
+        const active = targetFinderState.gemShapeFilter === s;
+        html += `
+          <button type="button" data-gt-shape="${s}" title="${SHAPES[s].name}"
+            class="px-1.5 py-1 rounded-md text-[11px] flex items-center gap-1 border transition ${active ? 'bg-gold-500/25 border-gold-400 text-gold-200 font-semibold' : 'bg-forge-800 border-slate-700 text-slate-300 hover:border-slate-500'}">
+            ${getShapeSVG(s, SHAPES[s].color, 11)}
+            <span>${SHAPES[s].short}</span>
+          </button>
+        `;
+      }
+      gemTargetPillsEl.innerHTML = html;
+    }
+
+    function renderGemTargetList() {
+      const q = targetFinderState.gemSearch.trim().toLowerCase();
+      let html = '';
+      let matches = 0;
+
+      for (let s = 1; s <= 8; s++) {
+        if (targetFinderState.gemShapeFilter !== 0 && targetFinderState.gemShapeFilter !== s) continue;
+        const gems = ALL_GEMS.filter(g => {
+          if (g.shape !== s) return false;
+          if (!q) return true;
+          return (
+            g.friendlyName.toLowerCase().includes(q) ||
+            g.id.toLowerCase().includes(q) ||
+            g.description.toLowerCase().includes(q) ||
+            SHAPES[s].name.toLowerCase().includes(q)
+          );
+        });
+        if (gems.length === 0) continue;
+        matches += gems.length;
+
+        html += `
+          <div class="sticky top-0 z-10 px-3 py-1 bg-forge-900/95 backdrop-blur border-y border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-[11px] font-display font-bold uppercase tracking-wider text-gold-400">
+              ${getShapeSVG(s, SHAPES[s].color, 12)}
+              <span>${SHAPES[s].name}</span>
+            </div>
+            <span class="font-mono text-[10px] text-slate-500">${gems.length}</span>
+          </div>
+        `;
+
+        for (const g of gems) {
+          const active = g.id === targetFinderState.selectedGemId;
+          const hasRecipe = DETERMINISTIC_RECIPES.some(r => r.outputId === g.id && r.category !== 'sameGem' && r.category !== 'uberUpgrades');
+          html += `
+            <button type="button" data-select-gem-target="${g.id}"
+              class="w-full text-left px-3 py-2 flex items-center gap-2.5 hover:bg-forge-800/90 transition ${active ? 'bg-gold-500/20 ring-1 ring-inset ring-gold-400/50' : ''}">
+              ${getShapeSVG(g.shape, g.fillColor, 20)}
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-semibold truncate ${active ? 'text-gold-200' : 'text-slate-100'}">${g.friendlyName}</span>
+                  ${hasRecipe ? '<span class="px-1 py-0.5 rounded text-[9px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shrink-0">100%</span>' : ''}
+                  ${!hasRecipe && g.itemRare === 100 ? '<span class="px-1 py-0.5 rounded text-[9px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/40 shrink-0">DROP</span>' : ''}
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 truncate">${g.id} • Base ${formatCompactGold(g.cost)}g</div>
+              </div>
+            </button>
+          `;
+        }
+      }
+
+      if (matches === 0) {
+        html = `<div class="py-10 px-4 text-center text-xs text-slate-400">No gems match "${targetFinderState.gemSearch}".</div>`;
+      }
+      gemTargetListEl.innerHTML = html;
+    }
+
+    function solveAndRenderGemTarget(gemId) {
+      targetFinderState.selectedGemId = gemId;
+      const result = findBestGemFusion(gemId);
+      targetFinderState.gemSolutions = result.solutions;
+      const g = result.targetGem;
+      const bounds = getGemStatBounds(g);
+      const statBoundsStr = g.bUniqueItem && !g.recipeBoostAmount
+        ? formatStatValue(g, bounds.min)
+        : `${formatStatValue(g, bounds.min)} – ${formatStatValue(g, bounds.max)}`;
+
+      gemTargetStatusEl.textContent = `Solved ${g.friendlyName} in ${result.elapsedMs.toFixed(1)} ms (${result.solutions.length} option${result.solutions.length === 1 ? '' : 's'})`;
+
+      let html = `
+        <div class="p-4 rounded-xl bg-forge-900 border border-gold-500/35 flex items-start gap-3">
+          ${getShapeSVG(g.shape, g.fillColor, 34)}
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <h3 class="font-display text-base font-bold text-slate-100">${g.friendlyName}</h3>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-forge-800 border border-slate-700 text-slate-300">${SHAPES[g.shape].name}</span>
+              ${g.itemRare === 100 ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-semibold">RARE (ItemRare=100)</span>' : ''}
+              ${g.bUniqueItem ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/35">UNIQUE</span>' : ''}
+            </div>
+            <p class="text-xs text-slate-300 mt-1">${g.description}</p>
+            <div class="text-[11px] font-mono text-slate-400 mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
+              <span>ID: <span class="text-slate-200">${g.id}</span></span>
+              <span>Stat: <span class="text-gold-300">${statBoundsStr}</span></span>
+              <span>Base Cost: <span class="text-slate-200">${formatCompactGold(g.cost)}g</span></span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (result.uncraftableNote) {
+        html += `
+          <div class="p-4 rounded-xl bg-rose-950/45 border border-rose-500/50 text-xs text-rose-200 leading-relaxed">
+            <div class="font-display font-bold uppercase tracking-wider text-rose-300 mb-1">Cannot Be Forged From Scratch</div>
+            ${result.uncraftableNote}
+          </div>
+        `;
+      }
+
+      if (result.solutions.length === 0 && !result.uncraftableNote) {
+        html += `
+          <div class="p-6 rounded-xl bg-forge-900 border border-slate-800 text-center text-xs text-slate-400">
+            No valid 3-gem fusion found under the current forge modifiers. Try toggling Gem Cook Boost or removing the Early Bloodline cap.
+          </div>
+        `;
+      }
+
+      result.solutions.forEach((sol, idx) => {
+        const isTop = idx === 0 && !sol.isUpgrade;
+        const probColor = sol.prob >= 99.99 ? 'text-emerald-300' : (isTop ? 'text-gold-300' : 'text-slate-100');
+        const cardBorder = isTop ? 'border-gold-400/70 bg-forge-900/95 shadow-[0_0_24px_rgba(212,163,83,0.12)]' : 'border-slate-700/80 bg-forge-900/75';
+
+        const inputCards = sol.inputs.map((inp, slotI) => {
+          const ig = GEM_BY_ID[inp.id];
+          const statVal = getDisplayStat(ig, inp.tier, inp.randPct);
+          const statStr = formatStatValue(ig, statVal);
+          const costStr = formatCompactGold(getCost(ig, inp.tier, inp.randPct, true));
+          const tierStr = ig.bUniqueItem
+            ? (ig.recipeBoostAmount > 0 ? `Lvl ${inp.tier}` : 'Unique')
+            : `T${inp.tier}${inp.randPct >= ig.maxRand - 1e-4 && ig.maxRand > 0 ? ' MAX' : (inp.randPct > 0 ? ` +${Math.round(inp.randPct * 100)}%` : '')}`;
+          return `
+            <div class="p-2.5 rounded-lg bg-forge-950/90 border border-slate-800 flex items-center gap-2">
+              <span class="w-4 h-4 rounded-full bg-forge-800 text-[10px] font-mono text-gold-300 flex items-center justify-center shrink-0">${slotI + 1}</span>
+              ${getShapeSVG(ig.shape, ig.fillColor, 18)}
+              <div class="min-w-0 flex-1">
+                <div class="text-xs font-semibold text-slate-100 truncate">${ig.friendlyName}</div>
+                <div class="text-[10px] font-mono text-slate-400 truncate">
+                  <span class="text-gold-300">${tierStr}</span> (${statStr}) • ${costStr}g
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        html += `
+          <div class="p-4 rounded-xl border ${cardBorder} space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-mono text-xl font-bold ${probColor}">
+                  ${sol.prob >= 99.99 ? '100%' : sol.prob.toFixed(2) + '%'}
+                </span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider ${sol.isDeterministic ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/45' : (isTop ? 'bg-gold-500/20 text-gold-200 border border-gold-400/50' : 'bg-forge-800 text-slate-300 border border-slate-700')}">
+                  ${sol.tag}
+                </span>
+              </div>
+              <button type="button" data-load-gem-solution="${idx}"
+                class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${isTop ? 'bg-gold-500/25 hover:bg-gold-500/35 border border-gold-400 text-gold-100' : 'bg-forge-800 hover:bg-forge-700 border border-slate-600 text-slate-200'}">
+                Load into Crucible
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">${inputCards}</div>
+
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-slate-400">
+              <span>Output: <span class="text-slate-200 font-semibold">${sol.statRangeText}</span></span>
+              <span>Cook Time: <span class="text-slate-200">${formatHours(sol.hours)}</span> (${sol.chips} Chips)</span>
+              <span>Input Sum: <span class="text-gold-300">${formatCompactGold(sol.totalInputCost)}g</span></span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">${sol.explanation}</p>
+          </div>
+        `;
+      });
+
+      gemTargetResultEl.innerHTML = html;
+      gemTargetResultEl.scrollTop = 0;
+    }
+
+    document.getElementById('btnOpenGemTarget').addEventListener('click', openGemTargetModal);
+    document.getElementById('btnCloseGemTarget').addEventListener('click', closeGemTargetModal);
+    gemTargetModalEl.addEventListener('mousedown', (e) => {
+      if (e.target === gemTargetModalEl) closeGemTargetModal();
+    });
+    gemTargetSearchEl.addEventListener('input', (e) => {
+      targetFinderState.gemSearch = e.target.value;
+      gemTargetClearBtn.classList.toggle('hidden', !targetFinderState.gemSearch);
+      renderGemTargetList();
+    });
+    gemTargetClearBtn.addEventListener('click', () => {
+      targetFinderState.gemSearch = '';
+      gemTargetSearchEl.value = '';
+      gemTargetClearBtn.classList.add('hidden');
+      renderGemTargetList();
+      gemTargetSearchEl.focus();
+    });
+    gemTargetPillsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-gt-shape]');
+      if (!btn) return;
+      targetFinderState.gemShapeFilter = Number(btn.dataset.gtShape);
+      renderGemTargetPills();
+      renderGemTargetList();
+    });
+    gemTargetListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-select-gem-target]');
+      if (!btn) return;
+      const gemId = btn.dataset.selectGemTarget;
+      targetFinderState.selectedGemId = gemId;
+      renderGemTargetList();
+      solveAndRenderGemTarget(gemId);
+    });
+    gemTargetResultEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-load-gem-solution]');
+      if (!btn) return;
+      const sol = targetFinderState.gemSolutions[Number(btn.dataset.loadGemSolution)];
+      if (!sol) return;
+      state.slots = sol.inputs.map(inp => makeSlotState(inp.id, inp.tier, inp.randPct));
+      if (sol.enableCookBoost) setCookBoostUI(true);
+      state.expandedOutcomeId = null;
+      state.outcomeShapeFilter = 0;
+      state.outcomeSearch = '';
+      document.getElementById('outcomeSearch').value = '';
+      closeGemTargetModal();
+      updateAll(true);
+    });
+
+    // -------------------------------------------------------------------------
+    // 14D. POTION TARGET FINDER MODAL UI CONTROLLER
+    // -------------------------------------------------------------------------
+    const potionTargetModalEl = document.getElementById('potionTargetModal');
+    const potionTargetSearchEl = document.getElementById('potionTargetSearch');
+    const potionTargetClearBtn = document.getElementById('btnClearPotionTargetSearch');
+    const potionTargetPillsEl = document.getElementById('potionTargetColorPills');
+    const potionTargetListEl = document.getElementById('potionTargetList');
+    const potionTargetResultEl = document.getElementById('potionTargetResultPane');
+    const potionTargetStatusEl = document.getElementById('potionTargetStatus');
+
+    function openPotionTargetModal() {
+      targetFinderState.potionOpen = true;
+      targetFinderState.potionSearch = '';
+      targetFinderState.potionColorFilter = 0;
+      potionTargetSearchEl.value = '';
+      potionTargetClearBtn.classList.add('hidden');
+      document.getElementById('potionTargetModifierBadge').textContent =
+        `• Boost: ${potionState.boostPerk ? '+10%' : 'OFF'} • Time Mod: -${potionState.timeModPct}%`;
+
+      renderPotionTargetPills();
+      renderPotionTargetList();
+      solveAndRenderPotionTarget(targetFinderState.selectedPotionId);
+
+      potionTargetModalEl.classList.remove('hidden');
+      potionTargetModalEl.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => potionTargetSearchEl.focus());
+    }
+
+    function closePotionTargetModal() {
+      if (!targetFinderState.potionOpen) return;
+      targetFinderState.potionOpen = false;
+      potionTargetModalEl.classList.add('hidden');
+      potionTargetModalEl.classList.remove('flex');
+      if (!state.pickerOpen && !state.recipesOpen && !potionState.recipesOpen && !targetFinderState.gemOpen) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function renderPotionTargetPills() {
+      const f = targetFinderState.potionColorFilter;
+      const dedicatedCount = ALL_POTIONS.filter(p => p.isDedicated).length;
+      let html = `
+        <button type="button" data-pt-color="0"
+          class="px-2 py-1 rounded-md text-[11px] font-medium border transition ${f === 0 ? 'bg-cryo-500/25 border-cryo-400 text-cryo-200 font-semibold' : 'bg-lab-800 border-slate-700 text-slate-300 hover:border-slate-500'}">
+          All (${ALL_POTIONS.length})
+        </button>
+        <button type="button" data-pt-color="99"
+          class="px-2 py-1 rounded-md text-[11px] font-medium border transition ${f === 99 ? 'bg-cryo-500/25 border-cryo-400 text-cryo-200 font-semibold' : 'bg-lab-800 border-slate-700 text-slate-300 hover:border-slate-500'}">
+          Potions (${dedicatedCount})
+        </button>
+      `;
+      for (let c = 1; c <= 4; c++) {
+        const active = f === c;
+        html += `
+          <button type="button" data-pt-color="${c}"
+            class="px-1.5 py-1 rounded-md text-[11px] flex items-center gap-1 border transition ${active ? 'bg-cryo-500/25 border-cryo-400 text-cryo-200 font-semibold' : 'bg-lab-800 border-slate-700 text-slate-300 hover:border-slate-500'}">
+            <span class="w-2 h-2 rounded-full" style="background-color:${POTION_COLORS[c].hex}"></span>
+            <span>${POTION_COLORS[c].name}</span>
+          </button>
+        `;
+      }
+      potionTargetPillsEl.innerHTML = html;
+    }
+
+    function renderPotionTargetList() {
+      const q = targetFinderState.potionSearch.trim().toLowerCase();
+      const f = targetFinderState.potionColorFilter;
+      let html = '';
+      let matches = 0;
+
+      const groups = [
+        { title: 'Dedicated Potions', items: ALL_POTIONS.filter(p => p.isDedicated) },
+        { title: 'Gem-Effect Potions', items: ALL_POTIONS.filter(p => !p.isDedicated) }
+      ];
+
+      for (const grp of groups) {
+        const filtered = grp.items.filter(p => {
+          if (f === 99 && !p.isDedicated) return false;
+          if (f >= 1 && f <= 4 && p.potionType !== f) return false;
+          if (!q) return true;
+          return (
+            p.friendlyName.toLowerCase().includes(q) ||
+            p.id.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q) ||
+            POTION_COLORS[p.potionType].label.toLowerCase().includes(q)
+          );
+        });
+        if (filtered.length === 0) continue;
+        matches += filtered.length;
+
+        html += `
+          <div class="sticky top-0 z-10 px-3 py-1 bg-lab-900/95 backdrop-blur border-y border-slate-800 flex items-center justify-between">
+            <span class="text-[11px] font-display font-bold uppercase tracking-wider text-cryo-300">${grp.title}</span>
+            <span class="font-mono text-[10px] text-slate-500">${filtered.length}</span>
+          </div>
+        `;
+
+        for (const p of filtered) {
+          const active = p.id === targetFinderState.selectedPotionId;
+          const col = POTION_COLORS[p.potionType];
+          const hasRecipe = POTION_RECIPES.some(r => r.resultId === p.id);
+          html += `
+            <button type="button" data-select-potion-target="${p.id}"
+              class="w-full text-left px-3 py-2 flex items-center gap-2.5 hover:bg-lab-800/90 transition ${active ? 'bg-cryo-500/20 ring-1 ring-inset ring-cryo-400/50' : ''}">
+              ${getBottleSVG(p.potionType, 20)}
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-semibold truncate ${active ? 'text-cryo-200' : 'text-slate-100'}">${p.friendlyName}</span>
+                  ${hasRecipe ? '<span class="px-1 py-0.5 rounded text-[9px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shrink-0">100%</span>' : ''}
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 truncate">${col.name} • ${p.id} • Base ${formatCompactGold(p.cost)}g</div>
+              </div>
+            </button>
+          `;
+        }
+      }
+
+      if (matches === 0) {
+        html = `<div class="py-10 px-4 text-center text-xs text-slate-400">No potions match "${targetFinderState.potionSearch}".</div>`;
+      }
+      potionTargetListEl.innerHTML = html;
+    }
+
+    function solveAndRenderPotionTarget(potionId) {
+      targetFinderState.selectedPotionId = potionId;
+      const result = findBestPotionBrew(potionId);
+      targetFinderState.potionSolutions = result.solutions;
+      const p = result.targetItem;
+      const col = POTION_COLORS[p.potionType];
+
+      potionTargetStatusEl.textContent = `Solved ${p.friendlyName} in ${result.elapsedMs.toFixed(1)} ms (${result.solutions.length} brew option${result.solutions.length === 1 ? '' : 's'})`;
+
+      let html = `
+        <div class="p-4 rounded-xl bg-lab-900 border border-cryo-400/35 flex items-start gap-3">
+          ${getBottleSVG(p.potionType, 34)}
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <h3 class="font-display text-base font-bold text-slate-100">${p.friendlyName}</h3>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-mono border ${col.badgeCls}">${col.label}</span>
+              ${p.itemRare === 100 ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-200 border border-purple-400/45 font-semibold">RECIPE ONLY</span>' : ''}
+            </div>
+            <p class="text-xs text-slate-300 mt-1">${p.description}</p>
+            <div class="text-[11px] font-mono text-slate-400 mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
+              <span>ID: <span class="text-slate-200">${p.id}</span></span>
+              <span>Base Value: <span class="text-cryo-300">${formatCompactGold(p.cost)}g</span></span>
+              <span>Max Cost: <span class="text-slate-200">${formatCompactGold(p.maxCost)}g</span></span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      result.solutions.forEach((sol, idx) => {
+        const isTop = idx === 0;
+        const probColor = sol.prob >= 99.99 ? 'text-emerald-300' : (isTop ? 'text-cryo-300' : 'text-slate-100');
+        const cardBorder = isTop ? 'border-cryo-400/70 bg-lab-900/95 shadow-[0_0_24px_rgba(56,189,248,0.14)]' : 'border-slate-700/80 bg-lab-900/75';
+
+        // Group unordered reagents nicely (e.g. "2× Blue Berries") or show numbered sequence if ordered
+        let reagentChipsHTML = '';
+        if (sol.bRequiresSetOrder) {
+          reagentChipsHTML = sol.reagents.map((rid, i) => {
+            const r = REAGENT_BY_ID[rid];
+            return `
+              <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-lab-950/95 border border-amber-500/45 text-[11px] text-slate-100">
+                <span class="font-mono text-[10px] text-amber-300 font-bold">${i + 1}.</span>
+                ${getReagentSVG(rid, 14)}
+                <span>${r.name}</span>
+              </span>
+            `;
+          }).join('');
+        } else {
+          const counts = [];
+          const map = new Map();
+          for (const rid of sol.reagents) {
+            if (!map.has(rid)) {
+              const obj = { rid, count: 0 };
+              map.set(rid, obj);
+              counts.push(obj);
+            }
+            map.get(rid).count++;
+          }
+          reagentChipsHTML = counts.map(({ rid, count }) => {
+            const r = REAGENT_BY_ID[rid];
+            const rCol = POTION_COLORS[r.mixType];
+            return `
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-lab-950/95 border border-slate-700/85 text-xs text-slate-100">
+                <span class="font-mono text-cryo-300 font-bold">${count}×</span>
+                ${getReagentSVG(rid, 16)}
+                <span>${r.name}</span>
+                <span class="text-[9px] font-mono px-1 rounded border ${rCol.badgeCls}">${rCol.name}</span>
+              </span>
+            `;
+          }).join('');
+        }
+
+        html += `
+          <div class="p-4 rounded-xl border ${cardBorder} space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-mono text-xl font-bold ${probColor}">
+                  ${sol.prob >= 99.99 ? '100%' : sol.prob.toFixed(2) + '%'}
+                </span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider ${sol.isDeterministic ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/45' : (isTop ? 'bg-cryo-500/20 text-cryo-200 border border-cryo-400/50' : 'bg-lab-800 text-slate-300 border border-slate-700')}">
+                  ${sol.tag}
+                </span>
+                ${sol.bRequiresSetOrder ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/45 font-semibold">EXACT ORDER</span>' : ''}
+              </div>
+              <button type="button" data-load-potion-solution="${idx}"
+                class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${isTop ? 'bg-cryo-500/25 hover:bg-cryo-500/35 border border-cryo-300 text-cryo-100' : 'bg-lab-800 hover:bg-lab-700 border border-slate-600 text-slate-200'}">
+                Load into Cauldron
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-1.5">${reagentChipsHTML}</div>
+
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-slate-400">
+              <span>Effect: <span class="text-slate-200 font-semibold">${sol.statRangeText}</span></span>
+              <span>Brew Time: <span class="text-cryo-300">${formatDurationHMS(sol.brewCost.realSeconds)}</span> (${sol.brewCost.chips} Chips)</span>
+              <span>Cauldron Val: <span class="text-slate-200">${formatCompactGold(sol.cauldronVal)}g</span> (${sol.qtyMult.toFixed(1)}×)</span>
+              <span>Reagent Cost: <span class="text-slate-300">${formatCompactGold(sol.baseSum)}g</span></span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">${sol.explanation}</p>
+          </div>
+        `;
+      });
+
+      potionTargetResultEl.innerHTML = html;
+      potionTargetResultEl.scrollTop = 0;
+    }
+
+    document.getElementById('btnOpenPotionTarget').addEventListener('click', openPotionTargetModal);
+    document.getElementById('btnClosePotionTarget').addEventListener('click', closePotionTargetModal);
+    potionTargetModalEl.addEventListener('mousedown', (e) => {
+      if (e.target === potionTargetModalEl) closePotionTargetModal();
+    });
+    potionTargetSearchEl.addEventListener('input', (e) => {
+      targetFinderState.potionSearch = e.target.value;
+      potionTargetClearBtn.classList.toggle('hidden', !targetFinderState.potionSearch);
+      renderPotionTargetList();
+    });
+    potionTargetClearBtn.addEventListener('click', () => {
+      targetFinderState.potionSearch = '';
+      potionTargetSearchEl.value = '';
+      potionTargetClearBtn.classList.add('hidden');
+      renderPotionTargetList();
+      potionTargetSearchEl.focus();
+    });
+    potionTargetPillsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-pt-color]');
+      if (!btn) return;
+      targetFinderState.potionColorFilter = Number(btn.dataset.ptColor);
+      renderPotionTargetPills();
+      renderPotionTargetList();
+    });
+    potionTargetListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-select-potion-target]');
+      if (!btn) return;
+      const potionId = btn.dataset.selectPotionTarget;
+      targetFinderState.selectedPotionId = potionId;
+      renderPotionTargetList();
+      solveAndRenderPotionTarget(potionId);
+    });
+    potionTargetResultEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-load-potion-solution]');
+      if (!btn) return;
+      const sol = targetFinderState.potionSolutions[Number(btn.dataset.loadPotionSolution)];
+      if (!sol) return;
+      potionState.queue = sol.reagents.slice();
+      potionState.expandedOutcomeId = null;
+      potionState.outcomeColorFilter = 0;
+      potionState.outcomeSearch = '';
+      document.getElementById('potionOutcomeSearch').value = '';
+      closePotionTargetModal();
+      updatePotionAll(true);
     });
   })();
   </script>
