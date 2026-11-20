@@ -212,17 +212,11 @@ When a cauldron finishes brewing:
 
 2. **Value Scaling (reuses Gem Forge constants):** 
 
-   $$
-   \text{Scale} = \frac{\text{FInterpEaseInOut}(1.1,\; 1.55,\; \text{FRand}(),\; 0.5)}{3.333}
-   $$
+   $$\text{Scale} = \frac{\text{FInterpEaseInOut}(1.1,\; 1.55,\; \text{FRand}(),\; 0.5)}{3.333}$$
 
-   $$
-   \text{ScaledValue} = \lfloor \text{MaxPotionValue} \times \text{Scale} \rfloor
-   $$
+   $$\text{ScaledValue} = \lfloor \text{MaxPotionValue} \times \text{Scale} \rfloor$$
 
-   $$
-   \text{ForcedRandomMinValue} = \lfloor \text{MaxPotionValue} \times 0.65 \rfloor
-   $$
+   $$\text{ForcedRandomMinValue} = \lfloor \text{MaxPotionValue} \times 0.65 \rfloor$$
 
     If $\text{ScaledValue} \le \text{ForcedRandomMinValue} \times \text{Scale}$, bumps $\text{ScaledValue} = \lfloor \text{ForcedRandomMinValue} \times \text{Scale} \times 1.1 \rfloor$.
 
